@@ -10,22 +10,18 @@ use Magento\Framework\Event\ObserverInterface;
 
 class Logout implements ObserverInterface
 {
-   
     protected $logger;
     protected $testFactory;
-
     protected $registry;
-
     protected $date;
-
-    
+ 
     public function __construct(Logger $logger,
     \Excellence\Hello\Model\TestFactory $testFactory,
     \Magento\Framework\Registry $registry,
     \Magento\Framework\Stdlib\DateTime\TimezoneInterface $date
 
-    
     )
+
     {
         $this->logger = $logger;
         $this->testFactory = $testFactory;
@@ -36,27 +32,17 @@ class Logout implements ObserverInterface
 
     public function execute(Observer $observer)
     {
-        
-   
-       $id = $observer->getEvent()->getCustomer()->getId();
-       
-
-   
-$time = $this->date->date()->format('Y-m-d H:i:s');
-
-   
-       $test = $this->testFactory->create();
-   
-
-  
-       if($test['checkout_time'] == NULL)
-       {
+      $id = $observer->getEvent()->getCustomer()->getId();   
+      $time = $this->date->date()->format('Y-m-d H:i:s');
+      $test = $this->testFactory->create();
+      if($test['checkout_time'] == NULL)
+      {
         $test->load($id);
         $test->setCheckoutTime($time);
         $test->save();
-       }
+      }
      
-     }
-
     }
+
+}
 
