@@ -2,7 +2,6 @@
     <event name="customer_login">
             <observer name="excellence_hello_test_observer" instance="Excellence\Hello\Observer\Login" />
     </event>
-
     <event name="customer_logout">  
             <observer name="customer_log_logout" instance="Excellence\Hello\Observer\Logout" />
     </event>
