@@ -5,10 +5,10 @@ $data = $block->getUserData()->getData();
 ?>
     <table class="table table-dark">
         <tr>
-            <th>Login ID</th>
-            <th>Email</th>
-            <th>Login Time</th>
-            <th>Logout Time</th>
+            <th><?php echo __('Login Id') ?></th>
+            <th><?php echo __('Email') ?></th>
+            <th><?php echo __('Login Time') ?></th>
+            <th><?php echo __('Logout Time') ?></th>
         </tr>
 <?php
      foreach($data as $data)
