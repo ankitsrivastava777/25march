@@ -4,25 +4,24 @@ $data = $block->sayHello();
 
 ?>
     <table class="table table-dark">
-    <tr>
-    <th>Login ID </th>
-    <th>Email    </th>
-    <th>Login Time</th>
-    <th>Logout Time</th>
-    </tr>
-    <?php
-    foreach($data as $data)
+        <tr>
+            <th>Login ID </th>
+            <th>Email    </th>
+            <th>Login Time</th>
+            <th>Logout Time</th>
+        </tr>
+<?php
+     foreach($data as $data)
 {
-    ?>
-    <tr>
-    <td><?= $data['test_id']; ?> </td>
-    <td><?= $data['title']; ?> </td>
-    <td><?= $data['creation_time']; ?> </td>
-    <td><?= $data['checkout_time']; ?> </td>
-    </tr>
-
-    <?php
-}
-
 ?>
-</table>
+        <tr>
+            <td><?= $data['test_id']; ?> </td>
+            <td><?= $data['title']; ?> </td>
+            <td><?= $data['creation_time']; ?> </td>
+            <td><?= $data['checkout_time']; ?> </td>
+        </tr>
+    
+<?php
+}
+?>
+    </table>
