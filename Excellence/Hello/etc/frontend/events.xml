@@ -1,9 +1,9 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
-<event name="customer_customer_authenticated">
-        <observer name="excellence_hello_test_observer" instance="Excellence\Hello\Observer\Login" />
+    <event name="customer_login">
+            <observer name="excellence_hello_test_observer" instance="Excellence\Hello\Observer\Login" />
     </event>
-    <event name="customer_logout">
-       
-        <observer name="customer_log_logout" instance="Excellence\Hello\Observer\Logout" />
+
+    <event name="customer_logout">  
+            <observer name="customer_log_logout" instance="Excellence\Hello\Observer\Logout" />
     </event>
 </config>
