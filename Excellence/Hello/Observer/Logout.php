@@ -20,14 +20,14 @@ class Logout implements ObserverInterface
     protected $formKey;
 
     public function __construct(Logger $logger,
-    \Excellence\Hello\Model\TestFactory $testFactory,
-    \Magento\Framework\Registry $registry,
-    \Magento\Framework\Stdlib\DateTime\TimezoneInterface $date,
-    \Excellence\Hello\Model\ResourceModel\Test\CollectionFactory $productFactory,
-    \Magento\Framework\Session\SessionManager $session,
-    \Magento\Integration\Model\Oauth\TokenFactory $tokenModelFactory,
-    \Magento\Customer\Model\Session $customerSession,
-    \Magento\Framework\Data\Form\FormKey $formKey
+      \Excellence\Hello\Model\TestFactory $testFactory,
+      \Magento\Framework\Registry $registry,
+      \Magento\Framework\Stdlib\DateTime\TimezoneInterface $date,
+      \Excellence\Hello\Model\ResourceModel\Test\CollectionFactory $productFactory,
+      \Magento\Framework\Session\SessionManager $session,
+      \Magento\Integration\Model\Oauth\TokenFactory $tokenModelFactory,
+      \Magento\Customer\Model\Session $customerSession,
+      \Magento\Framework\Data\Form\FormKey $formKey
     )
 
     {

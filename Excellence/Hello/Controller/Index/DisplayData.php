@@ -17,11 +17,6 @@ class DisplayData extends \Magento\Framework\App\Action\Action
         parent::__construct($context);
     }
 
-    /**
-     * Execute view action
-     *
-     * @return \Magento\Framework\Controller\ResultInterface
-     */
     public function execute()
     {
         return $this->resultPageFactory->create();
