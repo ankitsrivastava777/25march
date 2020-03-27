@@ -14,12 +14,20 @@ class Logout implements ObserverInterface
     protected $testFactory;
     protected $registry;
     protected $date;
- 
+    protected $productFactory;
+    protected $session;
+    protected $customerSession;
+    protected $formKey;
+
     public function __construct(Logger $logger,
     \Excellence\Hello\Model\TestFactory $testFactory,
     \Magento\Framework\Registry $registry,
-    \Magento\Framework\Stdlib\DateTime\TimezoneInterface $date
-
+    \Magento\Framework\Stdlib\DateTime\TimezoneInterface $date,
+    \Excellence\Hello\Model\ResourceModel\Test\CollectionFactory $productFactory,
+    \Magento\Framework\Session\SessionManager $session,
+    \Magento\Integration\Model\Oauth\TokenFactory $tokenModelFactory,
+    \Magento\Customer\Model\Session $customerSession,
+    \Magento\Framework\Data\Form\FormKey $formKey
     )
 
     {
@@ -27,22 +35,32 @@ class Logout implements ObserverInterface
         $this->testFactory = $testFactory;
         $this->registry = $registry;
         $this->date = $date;
-
+        $this->productFactory = $productFactory;
+        $this->session = $session;
+        $this->_tokenModelFactory = $tokenModelFactory;
+        $this->customerSession = $customerSession;
+        $this->formKey = $formKey;
     }
 
     public function execute(Observer $observer)
     {
-      $id = $observer->getEvent()->getCustomer()->getId();   
+      $customerId = $this->customerSession->getCustomer()->getId();
+      $customerToken = $this->_tokenModelFactory->create();
+      $tokenKey = $customerToken->createCustomerToken($customerId)->getToken();
+      $id = $observer->getEvent()->getCustomer(); 
       $time = $this->date->date()->format('Y-m-d H:i:s');
       $test = $this->testFactory->create();
-      if($test['checkout_time'] == NULL)
+      $data = $test->getCollection()->addFieldToFilter('session',"")->setOrder('test_id', 'ASC')->setPageSize(1)->getData();
+
+      foreach($data as $row)
       {
-        $test->load($id);
+       if($row['checkout_time'] == NULL)
+        $test->load($row['test_id']);
         $test->setCheckoutTime($time);
+        $test->setSession($tokenKey);
         $test->save();
       }
-     
-    }
-
+    }    
 }
+
 
