@@ -1,8 +1,50 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $block->getViewFileUrl('css/style.css')?>">
+
+<div class="block block-search">
+    <div class="block block-title"><strong><?= $block->escapeHtml(__('Search')) ?></strong></div>
+    <div class="block block-content">
+        <form class="form minisearch" id="search_customer_log_form" action="<?= $block->getUrl('hello/index/displaydata'); ?>" method="POST">
+            <div class="field search">
+                <label class="label" for="search" data-role="minisearch-label">
+                    <span><?= $block->escapeHtml(__('Search')) ?></span>
+                </label>
+                <div class="control">
+                    <input id="search"
+                           type="text"
+                           name="search_data"  
+                           placeholder="<?= $block->escapeHtmlAttr(__('Search Custom log...')) ?>"
+                           class="input-text"
+                           role="combobox"
+                           aria-haspopup="false"
+                           aria-autocomplete="both"
+                           autocomplete="off"
+                           aria-expanded="false" required/>
+                    <div id="search_autocomplete" class="search-autocomplete"></div>    
+                </div>
+            </div>
+            <div class="actions">
+                <button type="submit"
+                    title="<?= $block->escapeHtmlAttr(__('Search')) ?>"
+                    class="action search"
+                    aria-label="Search"
+                    name="submit"
+                >
+                    
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
 <?php
 
 $data = $block->getUserData()->getData();
-
+$data1 = $block->getSearchData();
+if(empty($data1))
+    {
 ?>
+
     <table class="table table-dark">
         <tr>
             <th><?php echo __('Login Id') ?></th>
@@ -26,17 +68,50 @@ $data = $block->getUserData()->getData();
     </table>
    
 <?php if ($block->getPagerHtml()): ?>
-    <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+    <br>
+    <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?>
 <?php endif ?>
 
-<style>
-.limiter
-{
-    float: left;
-    margin-left: 20px;
-}
-.items
-{
-    float:right;
-}
-</style>
+       
+
+<?php
+    }
+ 
+     else{
+    ?>
+        <h3><?php echo __('Your Search Result:');?></h3>
+
+
+        <table class="table">
+            <tr>
+                <th><?php echo __('Id'); ?></th>
+                <th><?php echo __('Email'); ?></th>
+                <th><?php echo __('Login Time') ?></th>
+                <th><?php echo __('Logout Time') ?></th>
+            </tr>
+<?php  
+        foreach($data1 as $data)
+        {      
+?>      
+            <tr>
+                <td><?= $data['test_id'];?></td>
+                <td><?= $data['title'];?></td>
+                <td><?= $data['creation_time'];?></td>
+                <td><?= $data['checkout_time'];?></td>
+            </tr>   
+    
+<?php
+        
+        }
+?>
+     </table>
+
+<?php  
+        }
+?>
+
+       
+
+
+
+
