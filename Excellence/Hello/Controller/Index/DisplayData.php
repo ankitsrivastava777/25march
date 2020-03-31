@@ -53,8 +53,8 @@ class DisplayData extends \Magento\Framework\App\Action\Action
         }  
         if($post)
         {   
-        $searchData = $post['search_data'];
-        $this->registry->register('searchData', $searchData);
+            $searchData = $post['search_data'];
+            $this->registry->register('searchData', $searchData);
         }
         return $this->resultPageFactory->create();
     }
