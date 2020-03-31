@@ -42,8 +42,7 @@ class DisplayData extends \Magento\Framework\App\Action\Action
             }
             else
             {
-                $errorMessage = "No data match";
-                $this->messageManager->addError($errorMessage);
+                $this->messageManager->addError(__("No data match"));
             }
         }  
         else

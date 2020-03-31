@@ -30,6 +30,16 @@
                     aria-label="Search"  
                 >         
                 </button>
+                <?php
+                if($block->inputData())
+                {
+                ?>
+                    <button>
+                    <a href="<?= $block->getUrl('hello/index/displayData') ?>">Back</a>
+                    </button>
+                <?php
+                }
+                ?>
             </div>
         </form>
     </div>
