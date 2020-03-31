@@ -39,6 +39,11 @@ class Display extends \Magento\Framework\View\Element\Template
             {
                 return $data;
             }
-        }         
+        }  
+    }
+    public function inputData()
+    {
+        $searchData = $this->registry->registry('searchData');
+        return $searchData;
     }
 }

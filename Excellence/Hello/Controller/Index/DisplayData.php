@@ -42,14 +42,20 @@ class DisplayData extends \Magento\Framework\App\Action\Action
             }
             else
             {
-                $this->messageManager->addError('No Data Match');
+                $errorMessage = "No data match";
+                $this->messageManager->addError($errorMessage);
             }
         }  
         else
         { 
             $error = 1;
             $this->registry->register('data', $error);      
-        }     
+        }  
+        if($post)
+        {   
+        $searchData = $post['search_data'];
+        $this->registry->register('searchData', $searchData);
+        }
         return $this->resultPageFactory->create();
     }
   
