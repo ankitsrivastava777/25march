@@ -36,18 +36,21 @@ class DisplayData extends \Magento\Framework\App\Action\Action
             $test = $this->testFactory->create();
             $data = $test->getCollection()->addFieldToSelect(['title', 'test_id', 'creation_time', 'checkout_time'])
              ->addFieldToFilter('title', array('like' => '%'.$searchData.'%')); 
-                    // print_r($data->getSize());
             if(!empty($data->getData()))
             {
                 $this->registry->register('data', $data);
             }
             else
             {
-                $this->messageManager->addNotice(__("search result not found "));
+                $this->messageManager->addError('No Data Match');
             }
-        }   
+        }  
+        else
+        { 
+            $error = 1;
+            $this->registry->register('data', $error);      
+        }     
         return $this->resultPageFactory->create();
-        
     }
   
 }
