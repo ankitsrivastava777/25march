@@ -13,6 +13,7 @@
                            type="text"
                            name="search_data"  
                            placeholder="<?= $block->escapeHtmlAttr(__('Search Custom log...')) ?>"
+                           value="<?php echo $block->inputData();?>"
                            class="input-text"
                            role="combobox"
                            aria-haspopup="false"
@@ -26,26 +27,34 @@
                 <button type="submit"
                     title="<?= $block->escapeHtmlAttr(__('Search')) ?>"
                     class="action search"
-                    aria-label="Search"
-                    name="submit"
-                >
-                    
+                    aria-label="Search"  
+                >         
                 </button>
+                <?php
+                if($block->inputData())
+                {
+                ?>
+                    <button>
+                        <a href="<?= $block->getUrl('hello/index/displayData') ?>"><?php echo __('Back') ?></a>
+                    </button>
+                <?php
+                }
+                ?>
             </div>
         </form>
     </div>
 </div>
 
-
 <?php
 
 $data = $block->getUserData()->getData();
 $data1 = $block->getSearchData();
-if(empty($data1))
+if(!empty($data1))
+{
+    if($data1 === 1)
     {
 ?>
-
-    <table class="table table-dark">
+ <table class="table table-dark">
         <tr>
             <th><?php echo __('Login Id') ?></th>
             <th><?php echo __('Email') ?></th>
@@ -66,21 +75,14 @@ if(empty($data1))
 }
 ?>
     </table>
-   
-<?php if ($block->getPagerHtml()): ?>
-    <br>
-    <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?>
-<?php endif ?>
-
-       
 
 <?php
+    
     }
- 
-     else{
-    ?>
+    else
+    {  
+?>
         <h3><?php echo __('Your Search Result:');?></h3>
-
 
         <table class="table">
             <tr>
@@ -98,20 +100,12 @@ if(empty($data1))
                 <td><?= $data['title'];?></td>
                 <td><?= $data['creation_time'];?></td>
                 <td><?= $data['checkout_time'];?></td>
-            </tr>   
-    
-<?php
-        
+            </tr>     
+<?php      
         }
 ?>
      </table>
-
 <?php  
-        }
+    }
+}
 ?>
-
-       
-
-
-
-
